@@ -1,5 +1,5 @@
 <template>
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-dark">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -22,3 +22,18 @@ export default {
   name: 'Navbar',
 };
 </script>
+
+<style lang="scss">
+    #nav {
+        ul.navbar-nav{
+            li{
+                a.nav-link{
+                    color: #FFF;
+                }
+                a.nav-link:hover{
+                    color: #429D5B;
+                }
+            }
+        }
+    }
+</style>

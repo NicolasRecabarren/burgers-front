@@ -26,7 +26,7 @@
                 <template v-slot:modal-title>
                     ¿Está seguro(a) de querer eliminar la hamburguesa "{{ burguer.nombre }}"?
                 </template>
-                <b-button class="mt-3 btn-danger" block @click="eliminarHamburguesa(burguer._id)">
+                <b-button class="mt-3 btn-danger" block @click="deleteBurguer(burguer._id, classModalConfirmacion)">
                     Confirmar
                 </b-button>
                 <b-button class="mt-3" block @click="$bvModal.hide(classModalConfirmacion)">
@@ -49,31 +49,16 @@
 
 <script>
 export default {
-    props: ['burguer', 'counter'],
+    props: [
+        'burguer',
+        'counter',
+        'deleteBurguer'
+    ],
+
     data(){
         return {
             classModalIngredientes: 'bv-modal-ingredientes-' + this.counter,
             classModalConfirmacion: 'bv-modal-confirmacion-' + this.counter
-        }
-    },
-
-    methods: {
-        eliminarHamburguesa(idHamburguesa){
-            this.$http.delete('https://prueba-hamburguesas.herokuapp.com/burguer/'+idHamburguesa)
-                .then( res => {
-                    this.notificacion('Hamburguesa eliminada correctamente.', 'success', 'Proceso terminado.');
-                    this.$bvModal.hide(classModalConfirmacion);
-                }, error => {
-                    this.notificacion('Ha ocurrido un problema al eliminar la hamburguesa.', 'danger', 'Error.');
-                })
-        },
-
-        notificacion(bodyContent = '', color = null, title = null) {
-            this.$bvToast.toast(bodyContent, {
-                title: `${title || 'Notificación'}`,
-                variant: color,
-                solid: true
-            })
         }
     }
 };

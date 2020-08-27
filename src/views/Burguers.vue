@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <burguer-header />
+        <BurguerHeader :throwNotification="throwNotification" />
         <table class="table">
             <thead>
                 <tr>
@@ -16,6 +16,8 @@
                         :burguer="burguer" 
                         :counter="index+1" 
                         :deleteBurguer="deleteBurguer" 
+                        :throwNotification="throwNotification"
+                        :ingredientesBase="ingredientesBase"
                 />
             </tbody>
         </table>
@@ -35,7 +37,28 @@ export default {
 
     data() {
         return {
-        burguers: [],
+            burguers: [],
+            ingredientesBase: [
+                {nombre: 'Aceitunas negras', imagen: '/ingredientes/aceitunas_negras.png', selected: false},
+                {nombre: 'Aros de Cebolla', imagen: '/ingredientes/aros_de_cebolla.png', selected: false},
+                {nombre: 'Atun', imagen: '/ingredientes/atun.png', selected: false},
+                {nombre: 'Carne', imagen: '/ingredientes/carne.png', selected: false},
+                {nombre: 'Cebolla', imagen: '/ingredientes/cebolla.png', selected: false},
+                {nombre: 'Champiñones', imagen: '/ingredientes/champinones.png', selected: false},
+                {nombre: 'Choclo', imagen: '/ingredientes/choclo.png', selected: false},
+                {nombre: 'Choricillo', imagen: '/ingredientes/choricillo.png', selected: false},
+                {nombre: 'Espárragos', imagen: '/ingredientes/esparragos.png', selected: false},
+                {nombre: 'Queso', imagen: '/ingredientes/extra_queso.png', selected: false},
+                {nombre: 'Jamón', imagen: '/ingredientes/jamon.png', selected: false},
+                {nombre: 'Lechuga', imagen: '/ingredientes/lechuga.png', selected: false},
+                {nombre: 'Lomito', imagen: '/ingredientes/lomito.png', selected: false},
+                {nombre: 'Palmitos', imagen: '/ingredientes/palmitos.png', selected: false},
+                {nombre: 'Pepperoni', imagen: '/ingredientes/pepperoni.png', selected: false},
+                {nombre: 'Pimentón Verde', imagen: '/ingredientes/pimenton_verde.png', selected: false},
+                {nombre: 'Pollo', imagen: '/ingredientes/pollo.png', selected: false},
+                {nombre: 'Tocino', imagen: '/ingredientes/tocino.png', selected: false},
+                {nombre: 'Tomate', imagen: '/ingredientes/tomate.png', selected: false}
+            ]
         };
     },
 
@@ -64,6 +87,7 @@ export default {
                 }, error => {
                     this.throwNotification('Ha ocurrido un problema al eliminar la hamburguesa.', 'danger', 'Error.');
                 })
+                .catch( err => this.throwNotification('Ha ocurrido un problema al eliminar la hamburguesa.', 'danger', 'Error.') );
         },
 
         // Método que nos permite mostrar una notificación.

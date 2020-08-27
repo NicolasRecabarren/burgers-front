@@ -21,7 +21,8 @@ export default new Router({
         {
             path: '/hamburguesas-form',
             name: 'hamburguesas-form',
-            component: BurguerForm
+            component: BurguerForm,
+            props: true
         }
     ],
 });

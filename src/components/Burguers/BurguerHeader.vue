@@ -3,13 +3,14 @@
         <img src="burguer-bkg.png">
         <div class="overlay"></div> 
         <h1>Hamburguesas</h1>
-        <router-link to="/hamburguesas-form" class="btn btn-warning">Nueva hamburguesa</router-link>
+        <router-link v-if="!backButton" :to="{name: 'hamburguesas-form', params: {throwNotification}}" class="btn btn-warning">Nueva hamburguesa</router-link>
+        <router-link v-if="backButton" to="/hamburguesas" class="btn btn-light">Volver</router-link>
     </div>
 </template>
 
 <script>
 export default {
-    
+    props: ['backButton','throwNotification']
 }
 </script>
 
@@ -36,7 +37,7 @@ export default {
             opacity: 0.3;
             height: 100%;
         }
-        .btn.btn-warning{
+        .btn.btn-warning, .btn.btn-light{
             position: absolute;
             float: right;
             bottom: 15px;

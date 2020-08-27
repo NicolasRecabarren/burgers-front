@@ -4,15 +4,15 @@
         <td class="text-left">{{ burguer.nombre }}</td>
         <td class="text-left">{{ burguer.calorias }}</td>
         <td>
-            <!-- modal de ingredientes -->
+            <!-- modal de ver detalle -->
             <b-modal :id="classModalIngredientes" hide-footer>
                 <template v-slot:modal-title>
-                    Ingredientes de {{ burguer.nombre }}
+                    {{ burguer.nombre }} ({{burguer.calorias}} kcal)
                 </template>
                 <div class="d-block text-center">
                     <ul class="list-group">
-                        <li v-for="(ingrediente, index) in burguer.ingredientes" :key="index" class="list-group-item">
-                            {{ ingrediente }}
+                        <li v-for="(ingrediente, index) in ingredientes" :key="index" class="list-group-item">
+                            <img :src="ingrediente.imagen" v-if="ingrediente.imagen"> {{ ingrediente.nombre }}
                         </li>
                     </ul>
                 </div>
@@ -34,12 +34,15 @@
                 </b-button>
             </b-modal>
 
+            <!-- Botón ver detalle -->
             <button type="button" @click="$bvModal.show(classModalIngredientes)" class="btn btn-info btn-sm">
-                Ver ingredientes
+                Ver detalle
             </button>&nbsp;
-            <button type="button" class="btn btn-primary btn-sm">
-                Modificar
-            </button>&nbsp;
+            <!-- Botón modificar -->
+            <router-link :to="{name: 'hamburguesas-form', params: {burguer, throwNotification}}"
+                        class="btn btn-primary btn-sm">Modificar
+            </router-link>&nbsp;
+            <!-- Botón eliminar -->
             <button type="button" @click="$bvModal.show(classModalConfirmacion)" class="btn btn-danger btn-sm">
                 Eliminar
             </button>
@@ -52,14 +55,29 @@ export default {
     props: [
         'burguer',
         'counter',
-        'deleteBurguer'
+        'deleteBurguer',
+        'ingredientesBase',
+        'throwNotification'
     ],
 
     data(){
         return {
             classModalIngredientes: 'bv-modal-ingredientes-' + this.counter,
-            classModalConfirmacion: 'bv-modal-confirmacion-' + this.counter
+            classModalConfirmacion: 'bv-modal-confirmacion-' + this.counter,
+            ingredientes: []
         }
+    },
+
+    mounted() {
+        
+        this.burguer.ingredientes.forEach(element => {
+            let index = this.ingredientesBase.findIndex( e => e.nombre == element );
+            
+            this.ingredientes.push({
+                nombre: element,
+                imagen: (index !== -1) ? this.ingredientesBase[index].imagen : false
+            })
+        });
     }
 };
 </script>

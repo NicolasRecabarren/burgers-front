@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --host 127.0.0.1 --port 8080",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "vue": "^2.5.17",
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.16.0",
+    "vue": "^2.6.12",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1"
   },
@@ -17,9 +19,12 @@
     "@vue/cli-plugin-eslint": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
     "@vue/eslint-config-airbnb": "^3.0.5",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.12"
+  },
+  "peerDependencies": {
+    "vue-template-compiler": "^2.0.0"
   },
   "eslintConfig": {
     "root": true,
@@ -30,7 +35,10 @@
       "plugin:vue/essential",
       "@vue/airbnb"
     ],
-    "rules": {},
+    "rules": {
+      "linebreak-style": 0,
+      "code": 200
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
